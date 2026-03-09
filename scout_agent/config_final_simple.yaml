@@ -1,0 +1,111 @@
+# 🎯 小蜜蜂Agent最终优化配置（简化版）
+# 版本：v1.2.0_final
+
+agent:
+  name: "小蜜蜂Agent_v1.2_final"
+  version: "1.2.0"
+  calibration_date: "2026-03-07"
+
+# 教育权重（简化版）
+education_weights:
+  first_degree:
+    strict_client:
+      "985理工科STEM核心": 1.0
+      "QS100理工科STEM核心": 1.0
+      "985理工科STEM相关": 0.7
+      "QS100理工科STEM相关": 0.7
+      "211理工科STEM核心": 0.7
+      "985理工科边缘": 0.5
+      "QS100理工科边缘": 0.5
+      "211理工科STEM相关": 0.5
+      "211理工科边缘": 0.3
+      "商科本科": 0.0
+    loose_client:
+      "985理工科STEM核心": 1.0
+      "QS100理工科STEM核心": 1.0
+      "985商科": 1.0
+      "QS100商科": 1.0
+      "985理工科STEM相关": 0.8
+      "211理工科STEM核心": 0.8
+      "985理工科边缘": 0.6
+      "211理工科STEM相关": 0.6
+      "211商科": 0.5
+      "其他理工科": 0.4
+      "其他商科": 0.3
+  
+  second_degree:
+    strict_client:
+      "QS100理工科STEM核心": 1.0
+      "985理工科STEM核心": 1.0
+      "QS100商科": 0.8
+      "985商科": 0.8
+      "211理工科STEM核心": 0.8
+      "985理工科STEM相关": 0.6
+      "211理工科STEM相关": 0.6
+      "QS100理工科边缘": 0.6
+      "211商科": 0.4
+      "其他硕士": 0.3
+    loose_client:
+      "QS100理工科": 1.0
+      "985理工科": 1.0
+      "QS100商科": 1.0
+      "985商科": 1.0
+      "211理工科": 0.8
+      "211商科": 0.7
+      "其他硕士": 0.5
+
+# 经验权重
+experience_weights:
+  investment_continuity:
+    "同一机构5年以上": 1.2
+    "同一机构3年以上": 1.0
+    "累计投资4年以上": 0.8
+    "投资相关2年以上": 0.6
+    "频繁跳槽(2年内换工作)": -0.5
+  
+  industry_experience:
+    "与需求一致产业投资经验": 1.0
+    "投资机构经验": 0.9
+    "非相关产业投资经验": 0.6
+    "相关岗位经验": 0.4
+
+# 特殊规则
+special_rules:
+  missing_education:
+    "硕士优秀假设本科符合": {"adjustment": 0.3, "condition": "second_score>=0.8"}
+    "博士优秀假设本硕符合": {"adjustment": 0.4, "condition": "phd_score>=0.8"}
+  
+  major_relevance:
+    "边缘理工科不适合硬科技投资": {"adjustment": -0.3, "condition": "major_edge and jd_hardtech"}
+    "商科+理工科组合优化": {"adjustment": 0.1, "condition": "business+stem_combo"}
+  
+  experience_special:
+    "长期连续工作特别加分": {"adjustment": 0.2, "condition": "years>=5"}
+    "短期频繁跳槽减分": {"adjustment": -0.3, "condition": "job_changes>=2"}
+
+# 阈值
+thresholds:
+  strict_client:
+    pass_threshold: 0.70
+    reject_threshold: 0.40
+    review_threshold: 0.50
+    education_min: 0.30
+    experience_min: 0.25
+  
+  loose_client:
+    pass_threshold: 0.60
+    reject_threshold: 0.30
+    review_threshold: 0.40
+    education_min: 0.20
+    experience_min: 0.30
+
+# 决策权重
+decision_weights:
+  strict_client:
+    education: 0.45
+    experience: 0.45
+    relevance: 0.10
+  loose_client:
+    education: 0.35
+    experience: 0.55
+    relevance: 0.10

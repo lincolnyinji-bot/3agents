@@ -1,0 +1,84 @@
+{
+  "processed_candidates": {
+    "2f1070c7a07ac954": "2026-03-07T14:22:37.050160",
+    "7a57b7ac16e7efa8": "2026-03-07T14:22:37.050437",
+    "ffcbf5708254bc0d": "2026-03-07T14:22:37.050661",
+    "5334a626eb034db0": "2026-03-07T14:22:37.051139",
+    "4e7839b7aba7e2c5": "2026-03-07T14:22:37.051722"
+  },
+  "screening_decisions": {
+    "2f1070c7a07ac954": [
+      {
+        "candidate_id": "2f1070c7a07ac954",
+        "candidate_name": "张AI",
+        "screening_type": "strict",
+        "result": "reject",
+        "reason": "本科学校不符合要求（非985/非QS100）",
+        "rules_applied": [
+          "本科非985/QS100"
+        ],
+        "timestamp": "2026-03-07T14:22:37.050115"
+      }
+    ],
+    "7a57b7ac16e7efa8": [
+      {
+        "candidate_id": "7a57b7ac16e7efa8",
+        "candidate_name": "李商科",
+        "screening_type": "strict",
+        "result": "reject",
+        "reason": "本科为商科专业（商业航天需要理工科）",
+        "rules_applied": [
+          "本科非985/QS100",
+          "本科商科专业"
+        ],
+        "timestamp": "2026-03-07T14:22:37.050395"
+      }
+    ],
+    "ffcbf5708254bc0d": [
+      {
+        "candidate_id": "ffcbf5708254bc0d",
+        "candidate_name": "王理工",
+        "screening_type": "strict",
+        "result": "reject",
+        "reason": "本科学校不符合要求（非985/非QS100）",
+        "rules_applied": [
+          "本科非985/QS100"
+        ],
+        "timestamp": "2026-03-07T14:22:37.050606"
+      }
+    ],
+    "5334a626eb034db0": [
+      {
+        "candidate_id": "5334a626eb034db0",
+        "candidate_name": "赵销售",
+        "screening_type": "strict",
+        "result": "reject",
+        "reason": "当前职位与投资岗位不相关",
+        "rules_applied": [
+          "本科非985/QS100",
+          "岗位明显不相关"
+        ],
+        "timestamp": "2026-03-07T14:22:37.051102"
+      }
+    ],
+    "4e7839b7aba7e2c5": [
+      {
+        "candidate_id": "4e7839b7aba7e2c5",
+        "candidate_name": "刘应届",
+        "screening_type": "strict",
+        "result": "reject",
+        "reason": "相关工作经验不足3年",
+        "rules_applied": [
+          "工作经验不足"
+        ],
+        "timestamp": "2026-03-07T14:22:37.051685"
+      }
+    ]
+  },
+  "search_history": [],
+  "stats": {
+    "total_processed": 5,
+    "total_passed": 0,
+    "total_rejected": 5
+  }
+}

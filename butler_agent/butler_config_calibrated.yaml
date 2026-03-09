@@ -1,0 +1,334 @@
+# 🎯 管家Agent校准版配置
+# 集成小蜜蜂Agent v1.3.0（87.5%准确率校准版）
+# 更新日期：2026-03-07
+
+agent:
+  name: "管家Agent_calibrated"
+  version: "1.2.0"
+  integrated_with: "小蜜蜂Agent_v1.3_calibrated"
+  calibration_accuracy: 0.875
+  update_date: "2026-03-07"
+
+## 🔗 Agent集成配置
+
+agent_integration:
+  
+  # 小蜜蜂Agent配置
+  scout_agent:
+    enabled: true
+    config_version: "1.3.0"
+    calibration_accuracy: 0.875
+    key_features:
+      - "生物+商科组合直接否决规则"
+      - "核工程属于STEM核心专业"
+      - "通过阈值优化：苛刻0.65，宽松0.55"
+      - "长期工作经验特别加分"
+      - "顶级学校特别加分"
+    
+    # 搜索策略
+    search_schedule:
+      strict_screening: "09:00"
+      loose_screening: "20:00"
+    
+    # 输出格式
+    output_format: "standardized_candidates"
+  
+  # 裁判Agent配置
+  judge_agent:
+    enabled: true
+    integration_status: "待连接"
+    endpoint: "待配置"
+    
+    # 候选人评估请求格式
+    request_format:
+      required_fields:
+        - "candidate_id"
+        - "education_details"
+        - "experience_details"
+        - "jd_match_info"
+      optional_fields:
+        - "tags"
+        - "additional_notes"
+
+## 📊 工作流配置
+
+workflow:
+  
+  # 状态流转配置（基于校准优化）
+  state_machine:
+    
+    # 候选人状态定义
+    states:
+      discovered: "发现"
+      strict_screened: "严格初筛"
+      loose_screened: "宽松初筛"
+      judged: "裁判评估"
+      recommended: "推荐给用户"
+      rejected: "拒绝"
+      talent_pool: "人才储备"
+      hired: "录用"
+    
+    # 状态流转规则
+    transitions:
+      # 严格快筛流程
+      strict_flow:
+        from: "discovered"
+        to: "strict_screened"
+        condition: "strict_screening_time"
+        action: "run_strict_screening"
+      
+      # 宽松快筛流程
+      loose_flow:
+        from: "discovered"
+        to: "loose_screened"
+        condition: "loose_screening_time"
+        action: "run_loose_screening"
+      
+      # 裁判评估流程
+      judge_flow:
+        from: ["strict_screened", "loose_screened"]
+        to: "judged"
+        condition: "score >= threshold"
+        action: "send_to_judge_agent"
+      
+      # 推荐流程
+      recommend_flow:
+        from: "judged"
+        to: "recommended"
+        condition: "judge_score >= 0.8"
+        action: "recommend_to_user"
+      
+      # 人才储备流程
+      talent_pool_flow:
+        from: ["strict_screened", "loose_screened", "judged"]
+        to: "talent_pool"
+        condition: "special_talent_detected"
+        action: "add_to_talent_pool"
+
+  # 定时任务配置
+  scheduling:
+    
+    # 严格快筛：早上9点
+    strict_screening:
+      enabled: true
+      cron_expression: "0 9 * * *"  # 每天9:00
+      description: "严格快筛（质量优先）"
+      parameters:
+        client_types: ["strict"]
+        strategy: "quality_first"
+        max_results: 50
+    
+    # 宽松快筛：晚上8点
+    loose_screening:
+      enabled: true
+      cron_expression: "0 20 * * *"  # 每天20:00
+      description: "宽松快筛（覆盖优先）"
+      parameters:
+        client_types: ["loose", "strict"]  # 宽松+苛刻补充
+        strategy: "coverage_first"
+        max_results: 100
+    
+    # 日报生成：晚上10点
+    daily_report:
+      enabled: true
+      cron_expression: "0 22 * * *"  # 每天22:00
+      description: "生成每日工作报告"
+      parameters:
+        report_types: ["summary", "insights", "recommendations"]
+
+## 📈 报告生成配置
+
+reporting:
+  
+  # 日报内容配置（基于校准优化）
+  daily_report:
+    
+    # 摘要部分
+    summary:
+      enabled: true
+      items:
+        - "各JD候选人数统计（按客户类型分组）"
+        - "通过/拒绝/审核比例分析"
+        - "主要拒绝原因统计（生物+商科否决、第一学历商科等）"
+        - "人才储备库更新情况"
+    
+    # 洞察分析
+    insights:
+      enabled: true
+      items:
+        - "教育背景分布分析（STEM核心 vs 边缘 vs 商科）"
+        - "工作经验模式分析（连续工作 vs 频繁跳槽）"
+        - "搜索关键词效果评估"
+        - "规则准确率统计（基于用户反馈）"
+        - "错误样本分析（识别需要优化的规则）"
+    
+    # 建议部分
+    recommendations:
+      enabled: true
+      items:
+        - "规则优化建议（基于错误样本）"
+        - "搜索策略调整建议"
+        - "人才储备推荐（研究型人才、学术潜力人才）"
+        - "系统性能优化建议"
+  
+  # 周报配置
+  weekly_report:
+    enabled: true
+    generate_day: 6  # 周六
+    content:
+      - "一周工作总览"
+      - "累计数据统计"
+      - "趋势分析"
+      - "规则优化进展"
+      - "下周工作计划"
+
+## 🛠️ 错误处理和监控
+
+error_handling:
+  
+  # 网络异常处理
+  network_errors:
+    retry_count: 3
+    retry_delay: 5  # 秒
+    fallback_strategy: "use_cached_data"
+    
+  # 数据一致性检查
+  data_consistency:
+    enabled: true
+    checks:
+      - "候选人状态流转一致性"
+      - "去重检查（30天记忆）"
+      - "分数计算一致性"
+      - "阈值应用一致性"
+    
+  # 监控和报警
+  monitoring:
+    enabled: true
+    metrics:
+      - "每日处理候选人数量"
+      - "规则准确率（基于用户反馈）"
+      - "系统响应时间"
+      - "错误率统计"
+    alerts:
+      - "连续3次搜索失败"
+      - "规则准确率低于80%"
+      - "系统响应时间超过10秒"
+
+## 🎯 校准优化配置
+
+calibration:
+  
+  # 基于小蜜蜂Agent的校准结果
+  inherited_from_scout:
+    accuracy: 0.875
+    key_optimizations:
+      - "生物+商科组合直接否决"
+      - "核工程属于STEM核心专业"
+      - "通过阈值：苛刻0.65，宽松0.55"
+      - "长期工作经验特别加分"
+      - "顶级学校特别加分"
+    
+  # 持续校准配置
+  continuous_calibration:
+    enabled: true
+    feedback_source: "user_decisions"
+    update_frequency: "weekly"
+    accuracy_target: 0.85
+    
+    # 错误样本分析
+    error_sample_analysis:
+      enabled: true
+      focus_areas:
+        - "人才储备识别优化"
+        - "边缘案例处理"
+        - "特殊规则验证"
+
+## 🚀 部署配置
+
+deployment:
+  
+  current_phase: "Phase 2 - 集成小蜜蜂Agent校准版"
+  status: "进行中"
+  
+  next_steps:
+    - "验证小蜜蜂Agent集成效果"
+    - "测试完整工作流"
+    - "配置裁判Agent连接"
+    - "准备生产环境部署"
+  
+  dependencies:
+    - "小蜜蜂Agent配置：已完成"
+    - "裁判Agent API：待配置"
+    - "猎聘测试账号：等待中"
+    - "生产环境准备：进行中"
+
+---
+# 📝 配置说明
+
+## 🔑 核心更新：
+
+### 1. **集成小蜜蜂Agent v1.3.0**
+- 准确率：87.5%（基于8个标注样本）
+- 包含所有校准优化规则
+- 专业分类、阈值、特别加分规则完整继承
+
+### 2. **工作流优化**
+- 状态流转逻辑基于校准结果优化
+- 定时任务配置对齐小蜜蜂Agent搜索策略
+- 错误处理和数据一致性检查增强
+
+### 3. **报告系统增强**
+- 日报包含校准相关的洞察分析
+- 错误样本分析和规则优化建议
+- 持续校准监控
+
+### 4. **部署准备**
+- 当前阶段：集成验证
+- 下一步：完整工作流测试
+- 依赖项管理清晰
+
+## 🎯 预期效果：
+
+### 立即效果：
+- **工作流协调**：小蜜蜂Agent发现 → 管家Agent协调 → 裁判Agent评估
+- **状态管理**：完整的候选人生命周期跟踪
+- **报告生成**：基于校准结果的洞察和建议
+
+### 中期效果：
+- **效率提升**：自动化候选人发现、初筛、评估全流程
+- **质量保证**：基于87.5%准确率的规则引擎
+- **持续优化**：基于用户反馈的规则迭代
+
+### 长期效果：
+- **系统扩展**：支持多平台、多客户类型
+- **智能提升**：基于更多数据的规则优化
+- **流程完善**：从发现到录用的全自动化
+
+## 📋 使用说明：
+
+1. **启动管家Agent**：`python3 butler_agent.py --config butler_config_calibrated.yaml`
+2. **验证集成**：运行集成测试脚本
+3. **监控运行**：检查日报和系统状态
+4. **收集反馈**：基于用户决策持续优化
+
+---
+# 🏆 校准成果继承
+
+## 从小蜜蜂Agent继承的优化：
+- ✅ 生物+商科组合直接否决
+- ✅ 核工程属于STEM核心专业
+- ✅ MIT顶级学校适当加分
+- ✅ 长期工作经验特别加分
+- ✅ 通过阈值优化（苛刻0.65，宽松0.55）
+
+## 管家Agent新增价值：
+- 🔄 工作流协调和状态管理
+- 📊 综合报告和洞察分析
+- 🛡️ 错误处理和数据一致性
+- 🔄 持续校准和优化循环
+
+## 系统整体目标：
+- **自动化程度**：候选人发现→初筛→评估→推荐全流程
+- **准确率目标**：85%+（基于用户反馈持续优化）
+- **效率目标**：减少90%手动筛选时间
+- **扩展性**：支持多平台和多客户类型

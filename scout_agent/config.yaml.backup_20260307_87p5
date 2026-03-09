@@ -1,0 +1,148 @@
+# 🐝 小蜜蜂Agent配置
+
+## 🎯 基础配置
+agent:
+  name: "小蜜蜂Agent"
+  version: "1.0.0"
+  platform: "liepin"  # 当前支持的平台
+  
+## 🔍 搜索配置
+search:
+  max_results: 100     # 每次搜索最大结果数
+  request_delay: 1.0   # 请求延迟（秒）
+  timeout: 30          # 请求超时（秒）
+  retry_times: 3       # 失败重试次数
+  
+## 🎯 初筛规则配置
+screening:
+  # 严格快筛规则（早上执行）
+  strict_rules:
+    - name: "本科学校要求"
+      description: "本科非985/QS100高校拒绝"
+      field: "education"
+      condition: "contains_not: ['985', 'QS']"
+      action: "reject"
+    
+    - name: "专业要求"
+      description: "本科为商科专业拒绝"
+      field: "education" 
+      condition: "contains_any: ['金融', '经济', '会计', '工商管理', 'MBA']"
+      action: "reject"
+    
+    - name: "岗位相关性"
+      description: "当前岗位与投资完全不相关拒绝"
+      field: "current_position"
+      condition: "contains_any: ['销售', '市场', '行政', '人事', '财务', '客服']"
+      action: "reject"
+    
+    - name: "工作经验"
+      description: "相关工作经验不足3年拒绝"
+      field: "experience"
+      condition: "less_than: 3"
+      action: "reject"
+    
+    - name: "期望城市"
+      description: "期望城市不包含目标城市拒绝"
+      field: "expected_city"
+      condition: "not_contains: ${target_city}"
+      action: "reject"
+  
+  # 宽松快筛规则（晚上执行）
+  loose_rules:
+    - name: "基础学历"
+      description: "本科及以上学历通过"
+      field: "education"
+      condition: "contains_any: ['本科', '硕士', '博士']"
+      action: "pass"
+    
+    - name: "基础经验"
+      description: "有工作经验通过"
+      field: "experience"
+      condition: "contains: '年'"
+      action: "pass"
+    
+    - name: "岗位相关性宽松"
+      description: "岗位有一定相关性需要详情判断"
+      field: "current_position"
+      condition: "contains_any: ['投资', '融资', '并购', '基金', '分析师', '经理', '总监']"
+      action: "need_detail"
+    
+    - name: "地域宽松"
+      description: "地域要求可协商"
+      field: "location"
+      condition: "always_true"
+      action: "pass"
+
+## 💾 记忆系统配置
+memory:
+  cleanup_days: 30      # 清理多少天前的记录
+  memory_file: "candidate_memory.json"
+  max_memory_size: 10000  # 最大记忆条数
+  
+## ⏰ 定时任务配置
+schedule:
+  strict_screening:
+    time: "09:00"       # 严格快筛时间
+    enabled: true
+    
+  loose_screening:
+    time: "20:00"       # 宽松快筛时间  
+    enabled: true
+    
+## 📊 输出配置
+output:
+  format: "json"        # 输出格式
+  save_to_file: true    # 是否保存到文件
+  output_dir: "./output/"
+  
+  # 对接裁判Agent
+  judge_integration:
+    enabled: true
+    endpoint: "http://localhost:8000/evaluate"  # 裁判API
+    format: "candidate_object"
+
+## 🚨 错误处理配置
+error_handling:
+  max_retries: 3
+  backoff_factor: 1.5
+  log_level: "INFO"
+  alert_on_failure: false
+  
+## 🔐 平台认证配置（需要你填写）
+platform_auth:
+  liepin:
+    username: ""        # 猎聘用户名
+    password: ""        # 猎聘密码
+    login_url: "https://www.liepin.com"
+    
+  bosszhipin:
+    enabled: false      # 暂未启用
+    username: ""
+    password: ""
+
+## 🎯 JD模板配置（示例）
+jd_templates:
+  - name: "深圳_AI_投资经理"
+    template: |
+      寻找深圳的AI方向投资经理
+      要求：
+      - 3-5年股权投资经验
+      - 985/211或海外QS100高校
+      - 理工科背景优先
+      - 有硬科技/AI领域投资案例
+      
+  - name: "北京_商业航天_投资总监"
+    template: |
+      寻找北京的商业航天方向投资总监
+      要求：
+      - 8年以上投资经验
+      - 有航天/军工背景优先
+      - 本科必须985或海外顶尖院校
+      - 商科背景一律不考虑
+
+## 📝 日志配置
+logging:
+  level: "INFO"
+  file: "scout_agent.log"
+  max_size: "10MB"
+  backup_count: 5

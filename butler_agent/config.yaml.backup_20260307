@@ -1,0 +1,180 @@
+# 👔 管家Agent配置
+
+## 🎯 基础配置
+butler:
+  name: "管家Agent"
+  version: "1.0.0"
+  data_directory: "./data/"
+  
+## 🔗 Agent集成配置
+agents:
+  scout:
+    enabled: true
+    endpoint: "http://localhost:8001"  # 小蜜蜂Agent地址
+    api_key: ""  # 如果需要认证
+    timeout: 30  # 超时时间（秒）
+    
+  judge:
+    enabled: true
+    endpoint: "http://localhost:8002"  # 裁判Agent地址  
+    api_key: ""
+    timeout: 30
+    
+  # 模拟模式（当真实Agent不可用时）
+  mock_mode: false  # 使用模拟Agent进行测试
+  
+## ⏰ 定时任务配置
+schedule:
+  enabled: true  # 是否启用定时任务
+  
+  # 严格快筛（苛刻客户）
+  strict_screening:
+    enabled: true
+    time: "09:00"  # 执行时间
+    jds:  # 要处理的JD列表（苛刻客户）
+      - "松禾资本-人工智能投资经理-深圳"
+      - "千乘资本-航空航天投资-上海"
+    
+  # 宽松快筛（宽松客户）
+  loose_screening:
+    enabled: true
+    time: "20:00"
+    jds:  # 要处理的JD列表（宽松客户）
+      - "明荟致远-硬科技投资总监"
+    
+  # 日报生成
+  daily_report:
+    enabled: true
+    time: "22:00"
+    
+  # 周报生成
+  weekly_report:
+    enabled: true
+    day: "monday"  # 每周一
+    time: "09:00"
+    
+## 📊 报告配置
+reporting:
+  # 日报配置
+  daily:
+    enabled: true
+    include_summary: true
+    include_recommendations: true
+    include_insights: true
+    max_recommendations: 10  # 最多显示推荐数量
+    
+  # 周报配置
+  weekly:
+    enabled: true
+    include_trends: true
+    include_performance: true
+    include_improvements: true
+    
+  # 通知渠道
+  channels:
+    - type: "feishu"  # 飞书
+      webhook: ""  # Webhook地址
+      enabled: true
+      
+    - type: "email"   # 邮箱
+      smtp_server: ""
+      sender: ""
+      recipients: []
+      enabled: false
+      
+    - type: "console"  # 控制台
+      enabled: true
+
+## 🗃️ 状态管理配置
+status_management:
+  # 候选人状态流转
+  status_flow:
+    discovered: "发现"
+    screened: "初筛通过"
+    evaluated: "评估完成"
+    recommended: "推荐待审"
+    reviewed: "用户审核"
+    contacting: "联系中"
+    interviewing: "面试安排"
+    hiring: "录用流程"
+    rejected: "已拒绝"
+    
+  # 数据存储
+  data_file: "candidate_status.json"
+  backup_enabled: true
+  backup_interval_days: 7
+  
+  # 清理旧数据
+  cleanup_enabled: true
+  cleanup_days: 90  # 清理90天前的数据
+
+## 🎯 工作流配置
+workflow:
+  # 评估阈值
+  evaluation_thresholds:
+    strict_client: 80  # 苛刻客户推荐阈值
+    loose_client: 75   # 宽松客户推荐阈值
+    
+  # 重试机制
+  retry:
+    max_attempts: 3
+    backoff_seconds: 5
+    
+  # 批量处理
+  batch_size: 10  # 批量评估数量
+
+## 📈 监控配置
+monitoring:
+  health_check_interval: 300  # 健康检查间隔（秒）
+  
+  # 告警阈值
+  alerts:
+    consecutive_failures: 3  # 连续失败次数
+    low_recommendation_rate: 10  # 推荐率低于10%
+    high_error_rate: 20  # 错误率高于20%
+    
+  # 日志配置
+  logging:
+    level: "INFO"
+    file: "butler_agent.log"
+    max_size: "10MB"
+    backup_count: 5
+
+## 🔧 高级配置
+advanced:
+  # 缓存配置
+  cache:
+    enabled: true
+    ttl_seconds: 3600  # 缓存过期时间
+    
+  # 并发配置
+  concurrency:
+    max_workers: 5  # 最大并发工作数
+    queue_size: 100  # 任务队列大小
+    
+  # 性能优化
+  performance:
+    enable_async: true
+    batch_processing: true
+
+## 👤 用户配置
+user:
+  # 用户偏好
+  preferences:
+    default_client_type: "strict"  # 默认客户类型
+    notification_time: "09:00"     # 偏好通知时间
+    
+  # 审核配置
+  review:
+    auto_approve_threshold: 85  # 自动批准阈值（评分>=85自动通过）
+    reminder_days: 3  # 提醒审核天数
+    
+## 🚀 测试配置（开发用）
+testing:
+  mock_data_enabled: true  # 启用模拟数据
+  test_jds:  # 测试用JD
+    - "松禾资本-人工智能投资经理-深圳"
+    - "千乘资本-航空航天投资-上海"
+    - "明荟致远-硬科技投资总监"
+    
+  test_candidates_per_jd: 3  # 每个JD的测试候选人数

@@ -1,0 +1,166 @@
+{
+  "candidates": [
+    {
+      "candidate_id": "1a12a7eacf17ded8",
+      "candidate_data": {
+        "id": "mock_candidate_0",
+        "name": "模拟候选人1",
+        "current_position": "投资经理",
+        "current_company": "模拟投资机构",
+        "education": "清华大学硕士",
+        "experience": "5年投资经验",
+        "location": "深圳"
+      },
+      "jd_text": "松禾资本-测试JD",
+      "client_type": "strict",
+      "current_status": "recommended",
+      "status_history": [
+        {
+          "from_status": "discovered",
+          "to_status": "screened",
+          "timestamp": "2026-03-07T17:39:58.273740",
+          "reason": "符合初筛规则",
+          "changed_by": "system",
+          "notes": ""
+        },
+        {
+          "from_status": "screened",
+          "to_status": "evaluated",
+          "timestamp": "2026-03-07T17:39:58.477028",
+          "reason": "评估完成，评分: 76",
+          "changed_by": "system",
+          "notes": ""
+        },
+        {
+          "from_status": "evaluated",
+          "to_status": "recommended",
+          "timestamp": "2026-03-07T17:39:58.878822",
+          "reason": "评分76达到推荐标准",
+          "changed_by": "system",
+          "notes": ""
+        }
+      ],
+      "evaluation_result": {
+        "success": true,
+        "candidate_id": "mock_candidate_0",
+        "candidate_name": "模拟候选人1",
+        "score": 76,
+        "summary": "候选人评估完成，评分76",
+        "strengths": [
+          "教育背景优秀",
+          "相关经验丰富"
+        ],
+        "weaknesses": [
+          "领域经验稍弱"
+        ],
+        "recommendation": "推荐"
+      },
+      "discovery_time": "2026-03-07 17:39:58.273316",
+      "last_updated": "2026-03-07 17:39:58.878825",
+      "tags": []
+    },
+    {
+      "candidate_id": "4dae8245e1af24ae",
+      "candidate_data": {
+        "id": "mock_candidate_1",
+        "name": "模拟候选人2",
+        "current_position": "投资经理",
+        "current_company": "模拟投资机构",
+        "education": "清华大学硕士",
+        "experience": "5年投资经验",
+        "location": "深圳"
+      },
+      "jd_text": "松禾资本-测试JD",
+      "client_type": "strict",
+      "current_status": "evaluated",
+      "status_history": [
+        {
+          "from_status": "discovered",
+          "to_status": "screened",
+          "timestamp": "2026-03-07T17:39:58.274608",
+          "reason": "符合初筛规则",
+          "changed_by": "system",
+          "notes": ""
+        },
+        {
+          "from_status": "screened",
+          "to_status": "evaluated",
+          "timestamp": "2026-03-07T17:39:58.677555",
+          "reason": "评估完成，评分: 73",
+          "changed_by": "system",
+          "notes": ""
+        }
+      ],
+      "evaluation_result": {
+        "success": true,
+        "candidate_id": "mock_candidate_1",
+        "candidate_name": "模拟候选人2",
+        "score": 73,
+        "summary": "候选人评估完成，评分73",
+        "strengths": [
+          "教育背景优秀",
+          "相关经验丰富"
+        ],
+        "weaknesses": [
+          "领域经验稍弱"
+        ],
+        "recommendation": "待考虑"
+      },
+      "discovery_time": "2026-03-07 17:39:58.274203",
+      "last_updated": "2026-03-07 17:39:58.677566",
+      "tags": []
+    },
+    {
+      "candidate_id": "607947f05fe665b4",
+      "candidate_data": {
+        "id": "mock_candidate_2",
+        "name": "模拟候选人3",
+        "current_position": "投资经理",
+        "current_company": "模拟投资机构",
+        "education": "清华大学硕士",
+        "experience": "5年投资经验",
+        "location": "深圳"
+      },
+      "jd_text": "松禾资本-测试JD",
+      "client_type": "strict",
+      "current_status": "evaluated",
+      "status_history": [
+        {
+          "from_status": "discovered",
+          "to_status": "screened",
+          "timestamp": "2026-03-07T17:39:58.275568",
+          "reason": "符合初筛规则",
+          "changed_by": "system",
+          "notes": ""
+        },
+        {
+          "from_status": "screened",
+          "to_status": "evaluated",
+          "timestamp": "2026-03-07T17:39:58.878164",
+          "reason": "评估完成，评分: 68",
+          "changed_by": "system",
+          "notes": ""
+        }
+      ],
+      "evaluation_result": {
+        "success": true,
+        "candidate_id": "mock_candidate_2",
+        "candidate_name": "模拟候选人3",
+        "score": 68,
+        "summary": "候选人评估完成，评分68",
+        "strengths": [
+          "教育背景优秀",
+          "相关经验丰富"
+        ],
+        "weaknesses": [
+          "领域经验稍弱"
+        ],
+        "recommendation": "待考虑"
+      },
+      "discovery_time": "2026-03-07 17:39:58.275107",
+      "last_updated": "2026-03-07 17:39:58.878178",
+      "tags": []
+    }
+  ],
+  "last_saved": "2026-03-07T17:39:58.878957"
+}

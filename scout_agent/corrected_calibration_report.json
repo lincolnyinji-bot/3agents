@@ -1,0 +1,169 @@
+{
+  "test_date": "2026-03-07",
+  "test_type": "corrected_calibration",
+  "corrections_applied": [
+    "核工程属于STEM核心专业（适合AI投资）",
+    "生物科学属于边缘理工科（不适合AI投资）",
+    "MIT顶级学校适当加分",
+    "机器学习python标签表示懂AI技术加分",
+    "生物+商科组合完全不匹配（强力减分）"
+  ],
+  "samples_count": 8,
+  "correct_count": 6,
+  "accuracy": 0.75,
+  "original_accuracy": 0.75,
+  "improvement": "+0.0%",
+  "focus_samples_accuracy": 0.5,
+  "results": [
+    {
+      "sample_id": "sample_1_wang",
+      "candidate": "王**",
+      "expected": "reject",
+      "actual": "reject",
+      "score": 0.3315,
+      "correct": true,
+      "evaluation": {
+        "total_score": 0.3315,
+        "education_score": 0.37000000000000005,
+        "experience_score": 0.3,
+        "relevance_score": 0.3,
+        "decision": "reject",
+        "reason": "总分0.33低于拒绝阈值0.4"
+      }
+    },
+    {
+      "sample_id": "sample_2_han",
+      "candidate": "韩**",
+      "expected": "pass",
+      "actual": "pass",
+      "score": 1.0,
+      "correct": true,
+      "evaluation": {
+        "total_score": 1.0,
+        "education_score": 1.0,
+        "experience_score": 0.9,
+        "relevance_score": 0.7,
+        "decision": "pass",
+        "special_rules": [
+          "STEM核心专业加分",
+          "世界顶级学校加分"
+        ],
+        "reason": "总分1.00达到通过阈值0.7"
+      }
+    },
+    {
+      "sample_id": "sample_3_huang",
+      "candidate": "黄**",
+      "expected": "reject",
+      "actual": "review",
+      "score": 0.495,
+      "correct": false,
+      "evaluation": {
+        "total_score": 0.495,
+        "education_score": 0.6000000000000001,
+        "experience_score": 0.9,
+        "relevance_score": 0.7,
+        "decision": "review",
+        "special_rules": [
+          "边缘理工科不适合AI投资减分",
+          "生物+商科完全不匹配额外减分",
+          "世界顶级学校加分"
+        ],
+        "reason": "总分0.49在审核区间[0.4, 0.7)"
+      }
+    },
+    {
+      "sample_id": "sample_5_chen",
+      "candidate": "陈先生",
+      "expected": "pass",
+      "actual": "pass",
+      "score": 1.0,
+      "correct": true,
+      "evaluation": {
+        "total_score": 1.0,
+        "education_score": 0.92,
+        "experience_score": 0.9,
+        "relevance_score": 0.7,
+        "decision": "pass",
+        "special_rules": [
+          "STEM核心专业加分",
+          "世界顶级学校加分"
+        ],
+        "reason": "总分1.00达到通过阈值0.7"
+      }
+    },
+    {
+      "sample_id": "sample_7_gu",
+      "candidate": "顾**",
+      "expected": "pass",
+      "actual": "pass",
+      "score": 0.7140000000000001,
+      "correct": true,
+      "evaluation": {
+        "total_score": 0.7140000000000001,
+        "education_score": 0.5200000000000001,
+        "experience_score": 1.0,
+        "relevance_score": 0.3,
+        "decision": "pass",
+        "reason": "总分0.71达到通过阈值0.7"
+      }
+    },
+    {
+      "sample_id": "sample_10_xu",
+      "candidate": "许**",
+      "expected": "pass",
+      "actual": "pass",
+      "score": 0.8725,
+      "correct": true,
+      "evaluation": {
+        "total_score": 0.8725,
+        "education_score": 0.75,
+        "experience_score": 0.7,
+        "relevance_score": 0.7,
+        "decision": "pass",
+        "special_rules": [
+          "世界顶级学校加分"
+        ],
+        "reason": "总分0.87达到通过阈值0.7"
+      }
+    },
+    {
+      "sample_id": "sample_14_lai",
+      "candidate": "赖先生",
+      "expected": "pass",
+      "actual": "pass",
+      "score": 0.815,
+      "correct": true,
+      "evaluation": {
+        "total_score": 0.815,
+        "education_score": 0.6000000000000001,
+        "experience_score": 0.7,
+        "relevance_score": 0.7,
+        "decision": "pass",
+        "special_rules": [
+          "世界顶级学校加分"
+        ],
+        "reason": "总分0.81达到通过阈值0.6"
+      }
+    },
+    {
+      "sample_id": "sample_16_li",
+      "candidate": "李嘉琦",
+      "expected": "pass_talent_pool",
+      "actual": "pass",
+      "score": 0.7175,
+      "correct": false,
+      "evaluation": {
+        "total_score": 0.7175,
+        "education_score": 0.75,
+        "experience_score": 0.5,
+        "relevance_score": 0.3,
+        "decision": "pass",
+        "special_rules": [
+          "世界顶级学校加分"
+        ],
+        "reason": "总分0.72达到通过阈值0.6"
+      }
+    }
+  ]
+}

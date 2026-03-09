@@ -1,0 +1,32 @@
+{
+  "validation_date": "2026-03-07",
+  "config_version": "1.3.0",
+  "calibration_accuracy": 0.875,
+  "key_features_validated": [
+    "决定性否决规则配置",
+    "决策阈值优化",
+    "专业分类体系",
+    "评分权重配置"
+  ],
+  "validation_results": [
+    {
+      "sample": "sample_1_wang",
+      "candidate": "王**",
+      "decisive_reject_applies": false,
+      "stem_core_check": false
+    },
+    {
+      "sample": "sample_2_han",
+      "candidate": "韩**",
+      "decisive_reject_applies": false,
+      "stem_core_check": true
+    },
+    {
+      "sample": "sample_3_huang",
+      "candidate": "黄**",
+      "decisive_reject_applies": true,
+      "stem_core_check": false
+    }
+  ],
+  "status": "PASSED"
+}

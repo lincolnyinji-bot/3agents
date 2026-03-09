@@ -1,0 +1,186 @@
+# 🎯 小蜜蜂Agent最终校准版配置 v1.3
+# 准确率：87.5%（7/8正确）
+# 校准日期：2026-03-07
+
+agent:
+  name: "小蜜蜂Agent_v1.3_calibrated"
+  version: "1.3.0"
+  calibration_accuracy: 0.875
+  calibration_date: "2026-03-07"
+
+# 决定性否决规则
+decisive_reject_rules:
+  bio_business_combo:
+    enabled: true
+    condition: "first_major contains '生物' and second_major contains '商'"
+    action: "reject"
+    reason: "生物+商科组合完全不匹配AI投资"
+  
+  strict_business_first_degree:
+    enabled: true
+    condition: "client_type == 'strict' and first_degree_type == '商科'"
+    action: "reject"
+    reason: "苛刻客户要求第一学历理工科"
+
+# 专业分类
+major_classification:
+  stem_core:
+    - "计算机"
+    - "软件工程"
+    - "人工智能"
+    - "机器学习"
+    - "数据科学"
+    - "电子工程"
+    - "电气工程"
+    - "自动化"
+    - "通信工程"
+    - "机械工程"
+    - "航空航天"
+    - "材料科学"
+    - "化学工程"
+    - "物理学"
+    - "数学"
+    - "统计学"
+    - "核工程"
+  
+  stem_edge:
+    - "生物科学"
+    - "土木工程"
+    - "建筑学"
+    - "农业工程"
+    - "环境工程"
+  
+  business:
+    - "金融"
+    - "经济"
+    - "管理"
+    - "市场营销"
+    - "工商管理"
+    - "会计"
+    - "国际贸易"
+    - "商学"
+
+# 评分权重
+scoring_weights:
+  education:
+    first_degree:
+      strict_client:
+        "985理工科STEM核心": 1.0
+        "QS100理工科STEM核心": 1.0
+        "985理工科STEM相关": 0.7
+        "QS100理工科STEM相关": 0.7
+        "211理工科STEM核心": 0.7
+        "985理工科边缘": 0.5
+        "QS100理工科边缘": 0.5
+        "211理工科STEM相关": 0.5
+        "211理工科边缘": 0.3
+        "商科本科": 0.0
+      loose_client:
+        "985理工科STEM核心": 1.0
+        "QS100理工科STEM核心": 1.0
+        "985商科": 1.0
+        "QS100商科": 1.0
+        "985理工科STEM相关": 0.8
+        "211理工科STEM核心": 0.8
+        "985理工科边缘": 0.6
+        "211理工科STEM相关": 0.6
+        "211商科": 0.5
+        "其他理工科": 0.4
+        "其他商科": 0.3
+    
+    second_degree:
+      strict_client:
+        "QS100理工科STEM核心": 1.0
+        "985理工科STEM核心": 1.0
+        "QS100商科": 0.8
+        "985商科": 0.8
+        "211理工科STEM核心": 0.8
+        "985理工科STEM相关": 0.6
+        "211理工科STEM相关": 0.6
+        "QS100理工科边缘": 0.6
+        "211商科": 0.4
+        "其他硕士": 0.3
+      loose_client:
+        "QS100理工科": 1.0
+        "985理工科": 1.0
+        "QS100商科": 1.0
+        "985商科": 1.0
+        "211理工科": 0.8
+        "211商科": 0.7
+        "其他硕士": 0.5
+
+  experience:
+    investment_continuity:
+      "同一机构8年以上": 1.2
+      "同一机构5年以上": 1.1
+      "同一机构3年以上": 1.0
+      "累计投资4年以上": 0.8
+      "投资相关2年以上": 0.6
+      "频繁跳槽(2年内换工作)": -0.5
+    
+    industry_experience:
+      "与需求一致产业投资经验": 1.0
+      "投资机构经验": 0.9
+      "非相关产业投资经验": 0.6
+      "相关岗位经验": 0.4
+
+  relevance:
+    "城市匹配": 0.3
+    "投资岗位经验": 0.4
+    "AI技能标签": 0.3
+
+# 决策阈值
+decision_thresholds:
+  strict_client:
+    pass_threshold: 0.65
+    reject_threshold: 0.40
+    review_threshold: 0.50
+  
+  loose_client:
+    pass_threshold: 0.55
+    reject_threshold: 0.30
+    review_threshold: 0.40
+
+# 特别加分规则
+special_bonus_rules:
+  long_term_experience_bonus:
+    enabled: true
+    condition: "experience_years >= 5"
+    bonus: 0.15
+  
+  top_school_bonus:
+    enabled: true
+    condition: "school in top_10"
+    bonus: 0.10
+  
+  ai_skills_bonus:
+    enabled: true
+    condition: "has_ai_skills"
+    bonus: 0.10
+
+# 决策流程权重
+decision_flow_weights:
+  strict_client:
+    education: 0.40
+    experience: 0.50
+    relevance: 0.10
+  
+  loose_client:
+    education: 0.30
+    experience: 0.60
+    relevance: 0.10
+
+# 搜索策略
+search_strategy:
+  strict_screening:
+    time: "09:00"
+    max_results: 50
+  
+  loose_screening:
+    time: "20:00"
+    max_results: 100
+
+# 报告配置
+reporting:
+  daily_report: true
+  calibration_feedback: true

@@ -1,0 +1,508 @@
+# 🎯 小蜜蜂Agent最终优化配置
+# 基于用户16个标注样本 + 详细反馈优化
+# 版本：v1.2.0（最终校准版）
+
+## 🏷️ 基础信息
+agent:
+  name: "小蜜蜂Agent_v1.2_calibrated"
+  version: "1.2.0"
+  calibration_date: "2026-03-07"
+  calibrated_by: "王桢"
+  calibration_samples: 16
+  original_accuracy: 0.75
+  target_accuracy: 0.85
+
+## 🎓 教育背景权重体系（基于用户反馈优化）
+
+### 学历权重（优先级顺序）
+education_weights:
+  
+  # 第一学历权重（基于用户校正）
+  first_degree:
+    # 苛刻客户权重
+    strict_client:
+      priority_1:
+        schools: ["985理工科STEM核心", "QS100理工科STEM核心"]
+        weight: 1.0
+        description: "985/QS100 STEM核心专业"
+        
+      priority_2:
+        schools: ["985理工科STEM相关", "QS100理工科STEM相关", "211理工科STEM核心"]
+        weight: 0.7
+        description: "985/QS100 STEM相关或211 STEM核心"
+        
+      priority_3:
+        schools: ["985理工科边缘", "QS100理工科边缘", "211理工科STEM相关"]
+        weight: 0.5
+        description: "985/QS100边缘理工科或211 STEM相关"
+        
+      priority_4:
+        schools: ["211理工科边缘", "双一流理工科", "其他理工科"]
+        weight: 0.3
+        description: "其他理工科"
+        
+      reject:
+        schools: ["商科本科"]
+        weight: 0.0
+        description: "商科本科直接拒绝"
+    
+    # 宽松客户权重
+    loose_client:
+      priority_1:
+        schools: ["985理工科STEM核心", "QS100理工科STEM核心", "985商科"]
+        weight: 1.0
+        description: "985/QS100 STEM核心或985商科"
+      # ...（其他类似，但权重更宽松）
+
+  # 第二学历权重（基于用户校正：海外名校 = 985 > 211）
+  second_degree:
+    # 苛刻客户权重
+    strict_client:
+      priority_1:
+        schools: ["QS100理工科STEM核心", "985理工科STEM核心"]
+        weight: 1.0
+        description: "QS100/985 STEM核心硕士"
+        
+      priority_2:
+        schools: ["QS100商科", "985商科", "211理工科STEM核心"]
+        weight: 0.8
+        description: "QS100/985商科或211 STEM核心硕士"
+        
+      priority_3:
+        schools: ["985理工科STEM相关", "211理工科STEM相关", "QS100理工科边缘"]
+        weight: 0.6
+        description: "985 STEM相关或211 STEM相关"
+        
+      priority_4:
+        schools: ["211商科", "985理工科边缘", "其他硕士"]
+        weight: 0.4
+        description: "211商科或其他硕士"
+    
+    # 宽松客户权重（更宽松）
+    loose_client:
+      priority_1:
+        schools: ["QS100理工科", "985理工科", "QS100商科", "985商科"]
+        weight: 1.0
+      # ...（类似但更宽松）
+
+  # 专业复合权重（基于用户校正：理工+商科 = 理工+理工 > 商科+理工）
+  degree_combo:
+    priority_1:
+      combos: ["理工科STEM核心本科 + 商科硕士", "理工科STEM核心本科 + 理工科STEM核心硕士"]
+      weight: 1.0
+      description: "最佳组合：STEM核心理工+商科 或 STEM核心理工+STEM核心理工"
+      
+    priority_2:
+      combos: ["理工科STEM相关本科 + 商科硕士", "理工科STEM相关本科 + 理工科STEM核心硕士"]
+      weight: 0.8
+      description: "良好组合：STEM相关理工+商科 或 STEM相关理工+STEM核心理工"
+      
+    priority_3:
+      combos: ["理工科边缘本科 + 商科硕士", "商科本科 + 理工科STEM核心硕士"]
+      weight: 0.6
+      description: "可接受组合"
+      
+    priority_4:
+      combos: ["商科本科 + 商科硕士", "理工科边缘本科 + 理工科边缘硕士"]
+      weight: 0.3
+      description: "较差组合"
+
+## 🧬 专业分类体系（基于用户确认）
+
+stem_classification:
+  # STEM核心专业（强烈加分，适合硬科技投资）
+  stem_core:
+    - "计算机"
+    - "软件工程"
+    - "人工智能"
+    - "机器学习"
+    - "数据科学"
+    - "电子工程"
+    - "电气工程"
+    - "自动化"
+    - "通信工程"
+    - "机械工程"
+    - "航空航天"
+    - "材料科学"
+    - "化学工程"
+    - "物理学"
+    - "数学"
+    - "统计学"
+    - "生物医学工程"
+    
+  # STEM相关专业（适度加分）
+  stem_related:
+    - "生物科学"
+    - "化学"
+    - "环境工程"
+    - "工业工程"
+    - "系统工程"
+    
+  # 边缘理工科（有限价值，不适合硬科技投资）
+  stem_edge:
+    - "土木工程"
+    - "建筑学"
+    - "采矿工程"
+    - "石油工程"
+    - "农业工程"
+    
+  # 商科专业（苛刻客户直接拒绝，宽松客户有限价值）
+  business:
+    - "金融"
+    - "经济"
+    - "管理"
+    - "市场营销"
+    - "工商管理"
+    - "会计"
+    - "国际贸易"
+
+## 💼 工作经验权重（基于用户校正）
+
+experience_weights:
+  
+  # 投资经验连续性（基于用户校正）
+  investment_continuity:
+    priority_1:
+      description: "在同一投资机构连续工作5年以上"
+      weight: 1.2  # 特别加分
+      example: "顾**：8年5个月在同一家公司"
+      
+    priority_2:
+      description: "在同一投资机构连续工作3年以上"
+      weight: 1.0
+      example: "韩**：3年11个月在同一投资平台"
+      
+    priority_3:
+      description: "累计投资经验4年以上"
+      weight: 0.8
+      example: "陈先生：近5年投资经验"
+      
+    priority_4:
+      description: "投资相关岗位2年以上"
+      weight: 0.6
+      
+    negative:
+      description: "频繁跳槽（2年内换工作）"
+      weight: -0.5
+      example: "短期频繁跳槽减分"
+
+  # 产业经验权重（基于用户校正）
+  industry_experience:
+    priority_1:
+      description: "与需求岗位一致的产业投资经验"
+      weight: 1.0
+      example: "AI方向候选人有AI领域投资案例"
+      
+    priority_2:
+      description: "投资机构经验"
+      weight: 0.9
+      example: "许**：力合创投·投资经理"
+      
+    priority_3:
+      description: "非相关产业投资经验"
+      weight: 0.6
+      
+    priority_4:
+      description: "相关岗位经验"
+      weight: 0.4
+
+## 🧠 特殊规则处理（基于用户澄清）
+
+special_rules:
+  
+  # 规则1：学历信息不全处理
+  missing_education_handling:
+    enabled: true
+    rules:
+      - name: "硕士学历优秀，假设本科符合"
+        condition: "second_degree.score >= 0.8 and second_degree.type in ['理工科STEM核心', '理工科STEM相关']"
+        action: "assume_first_degree_qualified"
+        assumed_score: 0.7
+        reason: "硕士学历符合要求，假设本科也符合"
+        
+      - name: "博士学历优秀，假设本硕符合"
+        condition: "second_degree.level == '博士' and second_degree.score >= 0.8"
+        action: "assume_both_degrees_qualified"
+        assumed_scores: {"first_degree": 0.7, "second_degree": 1.0}
+        reason: "博士学历优秀，假设本硕学历都符合"
+
+  # 规则2：专业相关性处理
+  major_relevance:
+    enabled: true
+    rules:
+      - name: "专业与投资方向不匹配"
+        condition: "education.major_category == 'stem_edge' and jd_field in ['人工智能', '硬科技']"
+        adjustment: -0.3
+        reason: "边缘理工科专业不适合硬科技投资"
+        example: "黄**：生物科学不适合AI投资"
+        
+      - name: "商科+理工科组合优化"
+        condition: "degree_combo == '商科本科 + 理工科硕士'"
+        adjustment: +0.1
+        reason: "商科本科+理工科硕士是可接受组合"
+        example: "陈先生：软件工程本科+金融硕士"
+
+  # 规则3：工作经验特殊处理
+  experience_special:
+    enabled: true
+    rules:
+      - name: "长期连续工作特别加分"
+        condition: "experience.continuity_score >= 1.0 and experience.years >= 5"
+        adjustment: +0.2
+        reason: "5年以上连续工作经验特别稳定"
+        example: "顾**：8年连续工作经验"
+        
+      - name: "短期频繁跳槽减分"
+        condition: "experience.job_changes_in_2_years >= 2"
+        adjustment: -0.3
+        reason: "2年内频繁跳槽稳定性差"
+
+## 🎯 阈值配置优化
+
+thresholds:
+  
+  # 苛刻客户阈值（松禾资本、千乘资本）
+  strict_client:
+    pass_threshold: 0.70  # 从0.75微调到0.70
+    reject_threshold: 0.40
+    review_threshold: 0.50
+    
+    # 子维度阈值
+    education_min: 0.30  # 教育最低分
+    experience_min: 0.25  # 经验最低分
+    relevance_min: 0.10  # 相关性最低分
+  
+  # 宽松客户阈值（明荟致远）
+  loose_client:
+    pass_threshold: 0.60
+    reject_threshold: 0.30
+    review_threshold: 0.40
+    
+    # 子维度阈值（更宽松）
+    education_min: 0.20
+    experience_min: 0.30  # 宽松客户更看重经验
+    relevance_min: 0.05
+
+## 🔍 搜索策略优化
+
+search_strategy:
+  
+  # 关键词生成（基于用户实操）
+  keyword_generation:
+    main_patterns:
+      - "${field}+投资"
+      - "${field}投资经理"
+      - "${field}投资总监"
+    
+    sub_patterns:
+      - "${sub_field}+投资"
+      - "投资+${position}"
+      - "${field} ${position}"
+    
+    # 多级关键词策略
+    multi_level: true
+    levels:
+      - level: "核心关键词"
+        examples: ["人工智能+投资", "AI+投资"]
+      - level: "扩展关键词"
+        examples: ["机器学习+投资", "深度学习+投资"]
+      - level: "长尾关键词"
+        examples: ["生成式AI+投资", "大模型+投资"]
+
+  # 城市匹配策略
+  city_matching:
+    priority: "current_city_in_expected_and_target"
+    fallback: "expected_city_in_target"
+    last_resort: "consider_if_scarce"
+
+## 📊 决策流程优化
+
+decision_flow:
+  
+  # 第一关：硬性拒绝条件
+  hard_reject_stage:
+    enabled: true
+    rules:
+      - name: "苛刻客户-第一学历商科"
+        condition: "client_type == 'strict' and education.first_degree.type == '商科'"
+        action: "reject"
+        reason: "苛刻客户要求第一学历理工科"
+        
+      - name: "频繁跳槽"
+        condition: "experience.job_changes_in_2_years >= 3"
+        action: "reject"
+        reason: "工作稳定性太差，频繁跳槽"
+        
+      - name: "年龄超限（宽松客户）"
+        condition: "client_type == 'loose' and candidate.age > 35"
+        action: "reject"
+        reason: "超过年龄限制（35岁）"
+
+  # 第二关：计分评估
+  scoring_stage:
+    enabled: true
+    weights:
+      strict_client:
+        education: 0.45
+        experience: 0.45
+        relevance: 0.10
+      loose_client:
+        education: 0.35
+        experience: 0.55
+        relevance: 0.10
+
+  # 第三关：人才储备识别
+  talent_pool_stage:
+    enabled: true
+    conditions:
+      - name: "优秀学术背景但经验不足"
+        condition: "education.score >= 0.8 and experience.score < 0.5"
+        action: "talent_pool"
+        pool_name: "学术潜力人才"
+        
+      - name: "领域相关研究经验"
+        condition: "has_research_experience = true and education.score >= 0.7"
+        action: "talent_pool"
+        pool_name: "研究型人才"
+
+## ⏰ 定时任务优化
+
+schedule:
+  
+  # 严格快筛：早上9点（质量优先）
+  strict_screening:
+    time: "09:00"
+    client_types: ["strict"]
+    strategy: "quality_first"
+    max_results: 50
+    filters:
+      education_min: 0.4
+      experience_min: 0.3
+  
+  # 宽松快筛：晚上8点（覆盖优先）
+  loose_screening:
+    time: "20:00"
+    client_types: ["loose", "strict"]  # 宽松客户 + 苛刻客户补充
+    strategy: "coverage_first"
+    max_results: 100
+    filters:
+      education_min: 0.2
+      experience_min: 0.2
+
+## 📈 报告和监控
+
+reporting:
+  
+  # 日报内容
+  daily_report:
+    summary_items:
+      - "各JD候选人数统计"
+      - "通过/拒绝比例分析"
+      - "主要拒绝原因统计"
+      - "人才储备库更新"
+      
+    insight_items:
+      - "教育背景分布分析"
+      - "工作经验模式分析"
+      - "搜索关键词效果评估"
+      - "规则准确率统计"
+      
+    recommendation_items:
+      - "规则优化建议"
+      - "搜索策略调整建议"
+      - "人才储备推荐"
+
+  # 校准反馈循环
+  calibration_feedback:
+    enabled: true
+    collect_user_feedback: true
+    update_frequency: "weekly"
+    accuracy_target: 0.85
+
+## 🧪 测试配置
+
+testing:
+  
+  # 基于标注数据的测试
+  calibration_tests:
+    enabled: true
+    samples: 16
+    expected_accuracy: 0.85
+    
+    # 重点关注样本
+    focus_samples:
+      - sample_3_huang  # 专业不匹配测试
+      - sample_7_gu     # 学历信息不全测试
+      - sample_5_chen   # 专业组合测试
+  
+  # A/B测试配置
+  ab_testing:
+    enabled: false  # 暂时禁用，先验证核心规则
+    future_phases:
+      - phase: "基础规则验证"
+      - phase: "特殊规则优化"
+      - phase: "阈值调优"
+
+## 🚀 部署计划
+
+deployment_plan:
+  
+  phase_1: "规则验证"
+    steps:
+      - "基于最终配置运行8个样本测试"
+      - "目标：准确率≥85%"
+      - "如果达标，进入下一阶段"
+      
+  phase_2: "小蜜蜂Agent集成"
+    steps:
+      - "更新小蜜蜂Agent配置文件"
+      - "运行端到端测试"
+      - "验证搜索+筛选全流程"
+      
+  phase_3: "管家Agent集成"
+    steps:
+      - "更新管家Agent规则库"
+      - "配置定时任务"
+      - "测试日报生成功能"
+      
+  phase_4: "生产部署"
+    steps:
+      - "等待猎聘账号"
+      - "真实平台测试"
+      - "监控和优化"
+
+---
+# 📝 配置说明
+
+## 核心改进点：
+
+### 1. **学历信息不全处理**
+- 硕士/博士学历优秀 → 假设本科也符合
+- 不是"补偿"，而是"合理假设"
+- 符合猎头实操逻辑
+
+### 2. **专业分类体系**
+- 基于用户确认的专业分类
+- STEM核心 vs STEM相关 vs 边缘理工科
+- 专业相关性 > 单纯的学校排名
+
+### 3. **工作经验价值**
+- 长期连续工作特别加分（不是学历补偿）
+- 5年以上连续工作：强烈稳定性证明
+- 2年内频繁跳槽：减分
+
+### 4. **特殊规则处理**
+- 只增加必要的特殊规则
+- 避免过度复杂化
+- 保持核心规则简单清晰
+
+## 预期效果：
+- **准确率提升**：从75%提升到85%+
+- **决策更符合实操**：基于用户真实决策逻辑
+- **系统更健壮**：处理好各种特殊情况
+
+## 使用说明：
+1. 将本配置重命名为 `config.yaml`
+2. 运行 `python test_final_calibration.py`
+3. 验证准确率达到85%+
+4. 集成到小蜜蜂Agent

@@ -1,0 +1,389 @@
+{
+  "test_date": "2026-03-07",
+  "samples_count": 8,
+  "correct_count": 6,
+  "accuracy": 0.75,
+  "results": [
+    {
+      "sample_id": "sample_1_wang",
+      "candidate": "王**",
+      "expected": "reject",
+      "actual": "reject",
+      "score": 0.28200000000000003,
+      "correct": true,
+      "evaluation": {
+        "total_score": 0.28200000000000003,
+        "scores": {
+          "education": {
+            "total": 0.43000000000000005,
+            "breakdown": {
+              "first_degree": 0.0,
+              "second_degree": 1.0,
+              "degree_combo": 0.3
+            }
+          },
+          "experience": {
+            "total": 0.16000000000000003,
+            "breakdown": {
+              "continuity": 0.0,
+              "industry": 0.4
+            }
+          },
+          "relevance": 0.3
+        },
+        "decision": "reject",
+        "reason": "第一学历商科，不符合理工科要求",
+        "details": {
+          "education_score": 0.43000000000000005,
+          "experience_score": 0.16000000000000003,
+          "relevance_score": 0.3
+        }
+      }
+    },
+    {
+      "sample_id": "sample_2_han",
+      "candidate": "韩**",
+      "expected": "pass",
+      "actual": "pass",
+      "score": 0.9600000000000001,
+      "correct": true,
+      "evaluation": {
+        "total_score": 0.9600000000000001,
+        "scores": {
+          "education": {
+            "total": 0.9,
+            "breakdown": {
+              "first_degree": 1.0,
+              "second_degree": 1.0,
+              "degree_combo": 0.0
+            }
+          },
+          "experience": {
+            "total": 1.0,
+            "breakdown": {
+              "continuity": 1.0,
+              "industry": 1.0
+            }
+          },
+          "relevance": 1.0
+        },
+        "decision": "pass",
+        "reason": "总分0.96达到通过阈值0.7",
+        "talent_pool": {
+          "eligible": false,
+          "reason": ""
+        },
+        "details": {
+          "education_score": 0.9,
+          "education_breakdown": {
+            "first_degree": 1.0,
+            "second_degree": 1.0,
+            "degree_combo": 0.0
+          },
+          "experience_score": 1.0,
+          "experience_breakdown": {
+            "continuity": 1.0,
+            "industry": 1.0
+          },
+          "relevance_score": 1.0
+        }
+      }
+    },
+    {
+      "sample_id": "sample_3_huang",
+      "candidate": "黄**",
+      "expected": "reject",
+      "actual": "pass",
+      "score": 0.91,
+      "correct": false,
+      "evaluation": {
+        "total_score": 0.91,
+        "scores": {
+          "education": {
+            "total": 0.9,
+            "breakdown": {
+              "first_degree": 1.0,
+              "second_degree": 1.0,
+              "degree_combo": 0.0
+            }
+          },
+          "experience": {
+            "total": 0.96,
+            "breakdown": {
+              "continuity": 1.0,
+              "industry": 0.9
+            }
+          },
+          "relevance": 0.7
+        },
+        "decision": "pass",
+        "reason": "总分0.91达到通过阈值0.7",
+        "talent_pool": {
+          "eligible": false,
+          "reason": ""
+        },
+        "details": {
+          "education_score": 0.9,
+          "education_breakdown": {
+            "first_degree": 1.0,
+            "second_degree": 1.0,
+            "degree_combo": 0.0
+          },
+          "experience_score": 0.96,
+          "experience_breakdown": {
+            "continuity": 1.0,
+            "industry": 0.9
+          },
+          "relevance_score": 0.7
+        }
+      }
+    },
+    {
+      "sample_id": "sample_5_chen",
+      "candidate": "陈先生",
+      "expected": "pass",
+      "actual": "pass",
+      "score": 0.9400000000000001,
+      "correct": true,
+      "evaluation": {
+        "total_score": 0.9400000000000001,
+        "scores": {
+          "education": {
+            "total": 0.9,
+            "breakdown": {
+              "first_degree": 1.0,
+              "second_degree": 1.0,
+              "degree_combo": 0.0
+            }
+          },
+          "experience": {
+            "total": 0.96,
+            "breakdown": {
+              "continuity": 1.0,
+              "industry": 0.9
+            }
+          },
+          "relevance": 1.0
+        },
+        "decision": "pass",
+        "reason": "总分0.94达到通过阈值0.7",
+        "talent_pool": {
+          "eligible": false,
+          "reason": ""
+        },
+        "details": {
+          "education_score": 0.9,
+          "education_breakdown": {
+            "first_degree": 1.0,
+            "second_degree": 1.0,
+            "degree_combo": 0.0
+          },
+          "experience_score": 0.96,
+          "experience_breakdown": {
+            "continuity": 1.0,
+            "industry": 0.9
+          },
+          "relevance_score": 1.0
+        }
+      }
+    },
+    {
+      "sample_id": "sample_7_gu",
+      "candidate": "顾**",
+      "expected": "pass",
+      "actual": "review",
+      "score": 0.6400000000000001,
+      "correct": false,
+      "evaluation": {
+        "total_score": 0.6400000000000001,
+        "scores": {
+          "education": {
+            "total": 0.4,
+            "breakdown": {
+              "first_degree": 0.0,
+              "second_degree": 1.0,
+              "degree_combo": 0.0
+            }
+          },
+          "experience": {
+            "total": 0.8400000000000001,
+            "breakdown": {
+              "continuity": 0.8,
+              "industry": 0.9
+            }
+          },
+          "relevance": 0.6
+        },
+        "decision": "review",
+        "reason": "总分0.64在审核区间[0.4, 0.7)",
+        "talent_pool": {
+          "eligible": false,
+          "reason": ""
+        },
+        "details": {
+          "education_score": 0.4,
+          "education_breakdown": {
+            "first_degree": 0.0,
+            "second_degree": 1.0,
+            "degree_combo": 0.0
+          },
+          "experience_score": 0.8400000000000001,
+          "experience_breakdown": {
+            "continuity": 0.8,
+            "industry": 0.9
+          },
+          "relevance_score": 0.6
+        }
+      }
+    },
+    {
+      "sample_id": "sample_10_xu",
+      "candidate": "许**",
+      "expected": "pass",
+      "actual": "pass",
+      "score": 0.82,
+      "correct": true,
+      "evaluation": {
+        "total_score": 0.82,
+        "scores": {
+          "education": {
+            "total": 0.9,
+            "breakdown": {
+              "first_degree": 1.0,
+              "second_degree": 1.0,
+              "degree_combo": 0.0
+            }
+          },
+          "experience": {
+            "total": 0.72,
+            "breakdown": {
+              "continuity": 0.6,
+              "industry": 0.9
+            }
+          },
+          "relevance": 1.0
+        },
+        "decision": "pass",
+        "reason": "总分0.82达到通过阈值0.7",
+        "talent_pool": {
+          "eligible": false,
+          "reason": ""
+        },
+        "details": {
+          "education_score": 0.9,
+          "education_breakdown": {
+            "first_degree": 1.0,
+            "second_degree": 1.0,
+            "degree_combo": 0.0
+          },
+          "experience_score": 0.72,
+          "experience_breakdown": {
+            "continuity": 0.6,
+            "industry": 0.9
+          },
+          "relevance_score": 1.0
+        }
+      }
+    },
+    {
+      "sample_id": "sample_14_lai",
+      "candidate": "赖先生",
+      "expected": "pass",
+      "actual": "pass",
+      "score": 0.62,
+      "correct": true,
+      "evaluation": {
+        "total_score": 0.62,
+        "scores": {
+          "education": {
+            "total": 0.4,
+            "breakdown": {
+              "first_degree": 0.0,
+              "second_degree": 1.0,
+              "degree_combo": 0.0
+            }
+          },
+          "experience": {
+            "total": 0.72,
+            "breakdown": {
+              "continuity": 0.6,
+              "industry": 0.9
+            }
+          },
+          "relevance": 1.0
+        },
+        "decision": "pass",
+        "reason": "总分0.62达到通过阈值0.6",
+        "talent_pool": {
+          "eligible": false,
+          "reason": ""
+        },
+        "details": {
+          "education_score": 0.4,
+          "education_breakdown": {
+            "first_degree": 0.0,
+            "second_degree": 1.0,
+            "degree_combo": 0.0
+          },
+          "experience_score": 0.72,
+          "experience_breakdown": {
+            "continuity": 0.6,
+            "industry": 0.9
+          },
+          "relevance_score": 1.0
+        }
+      }
+    },
+    {
+      "sample_id": "sample_16_li",
+      "candidate": "李嘉琦",
+      "expected": "pass_talent_pool",
+      "actual": "review",
+      "score": 0.5700000000000001,
+      "correct": true,
+      "evaluation": {
+        "total_score": 0.5700000000000001,
+        "scores": {
+          "education": {
+            "total": 0.9,
+            "breakdown": {
+              "first_degree": 1.0,
+              "second_degree": 1.0,
+              "degree_combo": 0.0
+            }
+          },
+          "experience": {
+            "total": 0.36000000000000004,
+            "breakdown": {
+              "continuity": 0.0,
+              "industry": 0.9
+            }
+          },
+          "relevance": 0.3
+        },
+        "decision": "review",
+        "reason": "总分0.57在审核区间[0.3, 0.6)",
+        "talent_pool": {
+          "eligible": true,
+          "pool_name": "学术潜力人才",
+          "reason": "教育分数0.90高，但经验分数0.36低"
+        },
+        "details": {
+          "education_score": 0.9,
+          "education_breakdown": {
+            "first_degree": 1.0,
+            "second_degree": 1.0,
+            "degree_combo": 0.0
+          },
+          "experience_score": 0.36000000000000004,
+          "experience_breakdown": {
+            "continuity": 0.0,
+            "industry": 0.9
+          },
+          "relevance_score": 0.3
+        }
+      }
+    }
+  ],
+  "engine_version": "1.0.0"
+}
