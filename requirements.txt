@@ -1,0 +1,16 @@
+# JDdog-agent-LP 依赖
+# 基础依赖
+python>=3.8
+
+# 可选：大模型API集成
+# openai>=1.0.0
+# anthropic>=0.25.0
+
+# 可选：Web界面
+# flask>=3.0.0
+# streamlit>=1.30.0
+
+# 开发工具
+# pytest>=7.0.0
+# black>=24.0.0
+# flake8>=7.0.0

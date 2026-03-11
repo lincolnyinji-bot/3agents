@@ -1,0 +1,286 @@
+[
+  {
+    "day": "第1天",
+    "keywords": [
+      "脑科学 投资",
+      "神经科学 投资"
+    ],
+    "filters": {
+      "city": [
+        "上海"
+      ],
+      "experience": "5-12年",
+      "education": [
+        "博士"
+      ],
+      "school_tier": [
+        "985"
+      ]
+    }
+  },
+  {
+    "day": "第2天",
+    "keywords": [
+      "脑科学 投资",
+      "脑科学 投资经理"
+    ],
+    "filters": {
+      "city": [
+        "上海"
+      ],
+      "experience": "5-12年",
+      "education": [
+        "博士"
+      ],
+      "school_tier": [
+        "985"
+      ]
+    }
+  },
+  {
+    "day": "第3天",
+    "keywords": [
+      "脑科学 投资总监",
+      "神经科学 投资"
+    ],
+    "filters": {
+      "city": [
+        "上海"
+      ],
+      "experience": "5-12年",
+      "education": [
+        "博士"
+      ],
+      "school_tier": [
+        "985"
+      ]
+    }
+  },
+  {
+    "day": "第4天",
+    "keywords": [
+      "神经科学 投资经理",
+      "神经科学 投资总监"
+    ],
+    "filters": {
+      "city": [
+        "上海"
+      ],
+      "experience": "5-12年",
+      "education": [
+        "博士"
+      ],
+      "school_tier": [
+        "985"
+      ]
+    }
+  },
+  {
+    "day": "第5天",
+    "keywords": [
+      "脑成像 投资",
+      "脑成像 投资经理"
+    ],
+    "filters": {
+      "city": [
+        "上海"
+      ],
+      "experience": "5-12年",
+      "education": [
+        "博士"
+      ],
+      "school_tier": [
+        "985"
+      ]
+    }
+  },
+  {
+    "day": "第6天",
+    "keywords": [
+      "脑成像 投资总监",
+      "神经工程 投资"
+    ],
+    "filters": {
+      "city": [
+        "上海"
+      ],
+      "experience": "5-12年",
+      "education": [
+        "博士"
+      ],
+      "school_tier": [
+        "985"
+      ]
+    }
+  },
+  {
+    "day": "第7天",
+    "keywords": [
+      "神经工程 投资经理",
+      "神经工程 投资总监"
+    ],
+    "filters": {
+      "city": [
+        "上海"
+      ],
+      "experience": "5-12年",
+      "education": [
+        "博士"
+      ],
+      "school_tier": [
+        "985"
+      ]
+    }
+  },
+  {
+    "day": "第8天",
+    "keywords": [
+      "计算神经 投资",
+      "计算神经 投资经理"
+    ],
+    "filters": {
+      "city": [
+        "上海"
+      ],
+      "experience": "5-12年",
+      "education": [
+        "博士"
+      ],
+      "school_tier": [
+        "985"
+      ]
+    }
+  },
+  {
+    "day": "第9天",
+    "keywords": [
+      "计算神经 投资总监",
+      "神经接口 投资"
+    ],
+    "filters": {
+      "city": [
+        "上海"
+      ],
+      "experience": "5-12年",
+      "education": [
+        "博士"
+      ],
+      "school_tier": [
+        "985"
+      ]
+    }
+  },
+  {
+    "day": "第10天",
+    "keywords": [
+      "神经接口 投资经理",
+      "神经接口 投资总监"
+    ],
+    "filters": {
+      "city": [
+        "上海"
+      ],
+      "experience": "5-12年",
+      "education": [
+        "博士"
+      ],
+      "school_tier": [
+        "985"
+      ]
+    }
+  },
+  {
+    "day": "第11天",
+    "keywords": [
+      "人工智能 脑科学 投资",
+      "人工智能 脑科学 投资经理"
+    ],
+    "filters": {
+      "city": [
+        "上海"
+      ],
+      "experience": "5-12年",
+      "education": [
+        "博士"
+      ],
+      "school_tier": [
+        "985"
+      ]
+    }
+  },
+  {
+    "day": "第12天",
+    "keywords": [
+      "人工智能 脑科学 投资总监",
+      "脑科学 投资经理"
+    ],
+    "filters": {
+      "city": [
+        "上海"
+      ],
+      "experience": "5-12年",
+      "education": [
+        "博士"
+      ],
+      "school_tier": [
+        "985"
+      ]
+    }
+  },
+  {
+    "day": "第13天",
+    "keywords": [
+      "脑科学 投资总监",
+      "神经科学 投资经理"
+    ],
+    "filters": {
+      "city": [
+        "上海"
+      ],
+      "experience": "5-12年",
+      "education": [
+        "博士"
+      ],
+      "school_tier": [
+        "985"
+      ]
+    }
+  },
+  {
+    "day": "第14天",
+    "keywords": [
+      "神经科学 投资总监",
+      "认知科学 投资经理"
+    ],
+    "filters": {
+      "city": [
+        "上海"
+      ],
+      "experience": "5-12年",
+      "education": [
+        "博士"
+      ],
+      "school_tier": [
+        "985"
+      ]
+    }
+  },
+  {
+    "day": "第15天",
+    "keywords": [
+      "认知科学 投资总监"
+    ],
+    "filters": {
+      "city": [
+        "上海"
+      ],
+      "experience": "5-12年",
+      "education": [
+        "博士"
+      ],
+      "school_tier": [
+        "985"
+      ]
+    }
+  }
+]
