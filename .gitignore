@@ -1,0 +1,12 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Backup files
+*.backup_*
+*.bak
+
+venv/
+__pycache__/
+*.pyc
+*.json

@@ -6,7 +6,8 @@ AI-H 猎头自动化系统 - 完整流程
 使用前提：
 1. 用调试模式启动Chrome并登录猎聘：
    taskkill /F /IM chrome.exe
-   & "C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="C:\Users\宗璐\chrome-debug-profile"
+   Start-Sleep -Seconds 2
+   & "C:/Program Files/Google/Chrome/Application/chrome.exe" --remote-debugging-port=9222 --user-data-dir="C:/Users/zonlu/chrome-debug-profile"
 2. 运行本脚本
 """
 import asyncio
