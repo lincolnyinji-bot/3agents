@@ -19,10 +19,19 @@ from typing import Dict, List, Optional
 class JudgeAlgorithmV2:
     """VC投资人评估算法 V2"""
 
-    # 权重配置
+    # 权重配置（基础，VP用）
     BASE_WEIGHTS = {
         "investment_experience": 0.30,
         "industry_insight":      0.25,
+        "project_sourcing":      0.20,
+        "education":             0.15,
+        "growth_potential":      0.10,
+    }
+
+    # IM/SIM级别权重：行研↑ 投资经验↓（王梓兆被offer验证：行研可替代部分经验）
+    IM_SIM_WEIGHTS = {
+        "investment_experience": 0.23,  # 下调7%
+        "industry_insight":      0.32,  # 上调7%
         "project_sourcing":      0.20,
         "education":             0.15,
         "growth_potential":      0.10,
@@ -55,7 +64,11 @@ class JudgeAlgorithmV2:
         """
         assert position_level in ("IM", "SIM", "VP")
         self.level = position_level
-        self.weights = dict(self.BASE_WEIGHTS)
+        # VP用BASE_WEIGHTS，IM/SIM用行研增强权重
+        if position_level == "VP":
+            self.weights = dict(self.BASE_WEIGHTS)
+        else:
+            self.weights = dict(self.IM_SIM_WEIGHTS)
         # 调整潜力与经验权重
         pot_w = self.LEVEL_POTENTIAL[position_level]
         exp_bonus = self.LEVEL_EXP_BONUS[position_level]
